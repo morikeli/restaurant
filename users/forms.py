@@ -1,4 +1,4 @@
-from .models import Food, Tables, FoodOrders
+from .models import Food, Tables, FoodOrders, BookTable
 from django import forms
 
 
@@ -20,6 +20,7 @@ class AddNewFoodForm(forms.ModelForm):
 class AddNewTableForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2'}))
     seats = forms.CharField(widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2'}))
+    price = forms.CharField(widget=forms.TextInput(attrs={'type': 'number', 'class': 'mb-2'}))
     
     class Meta:
         model = Tables
@@ -33,6 +34,13 @@ class PlaceFoodOrderForm(forms.ModelForm):
         ('Take away', 'Take away'),
     )
     type = forms.ChoiceField(widget=forms.Select(attrs={'type': 'select', 'class': 'mb-2'}), choices=SELECT_ORDER)
+
+    class Meta:
+        model = FoodOrders
+        fields = '__all__'
+
+class TableBookingForm(forms.ModelForm):
+    price = forms.CharField(widget=forms.TextInput(attrs={'type': 'number', 'class': 'mb-2'}))
 
     class Meta:
         model = FoodOrders
