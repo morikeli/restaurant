@@ -7,6 +7,7 @@ class User(AbstractUser):
     gender = models.CharField(max_length=7, blank=False)
     phone_no = models.CharField(max_length=10, blank=False)
     updated = models.DateTimeField(auto_now=True)
+    role = models.CharField(max_length=10, blank=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
