@@ -41,7 +41,7 @@ class Tables(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['name']
         verbose_name_plural = 'Tables'
 
     def __str__(self):
@@ -59,7 +59,7 @@ class FoodOrders(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
         verbose_name_plural = 'Customer Food Orders'
 
     def __str__(self):
@@ -76,7 +76,7 @@ class BookTable(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
         verbose_name_plural = 'Booked Tables'
 
     def __str__(self):
