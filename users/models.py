@@ -36,6 +36,7 @@ class Tables(models.Model):
     booked = models.BooleanField(default=False, editable=False)
     name = models.CharField(max_length=50, blank=False)
     seats = models.PositiveIntegerField(default=0)
+    price = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -68,7 +69,9 @@ class FoodOrders(models.Model):
 class BookTable(models.Model):
     id  = models.CharField(max_length=20, primary_key=True, unique=True, editable=False)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
-    table_no = models.CharField(max_length=20, blank=False, editable=False)
+    table_no = models.ForeignKey(Tables, on_delete=models.DO_NOTHING, editable=False)
+    people = models.PositiveIntegerField(default=0)
+    cost = models.PositiveIntegerField(default=0, editable=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
