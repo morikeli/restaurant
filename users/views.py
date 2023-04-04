@@ -83,7 +83,7 @@ def edit_tables_info_view(request, id):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.is_staff is True and user.is_superuser is False)
 def food_orders_view(request, food_order):
-    order = FoodOrders.objects.get(id=food_order)
+    order = Food.objects.get(id=food_order)
     form = PlaceFoodOrderForm()
 
     if request.method == 'POST':
@@ -93,6 +93,9 @@ def food_orders_view(request, food_order):
             new_order_record = form.save(commit=False)
             new_order_record.customer = request.user
             new_order_record.food = order
+            new_order_record.price = order.price
+            # cost of the ordered food
+            new_order_record.cost = new_order_record.order * order.price
             new_order_record.save()
 
             messages.success(request, 'Food order submitted successfully!')
@@ -115,6 +118,9 @@ def table_booking_view(request, table):
             new_booking = form.save(commit=False)
             new_booking.customer = request.user
             new_booking.table_no = table_obj
+
+            # cost of the booked table
+            new_booking.cost = new_booking.people * table_obj.price
             new_booking.save()
 
             messages.success(request, 'Table booked successfully!')
