@@ -51,7 +51,9 @@ class FoodOrders(models.Model):
     id  = models.CharField(max_length=20, primary_key=True, unique=True, editable=False)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
     food = models.ForeignKey(Food, on_delete=models.DO_NOTHING, editable=False)
+    order = models.PositiveIntegerField(default=0)
     price = models.PositiveIntegerField(default=0, editable=False)
+    cost = models.PositiveIntegerField(default=0, editable=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
